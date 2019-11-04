@@ -20,6 +20,7 @@ public class ComprarRes {
     private String idTransaccion;
     private String codVoucher;
     private String mensaje;
+    private String fecha;
     private String confirmacion;
     private String respuesta;
 
@@ -66,24 +67,33 @@ public class ComprarRes {
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     
-    
+        
     
     public void unmarshall() throws ProtocolException
     {
         String parts [] =this.mensaje.split(SEPARATOR);
-        if(parts.length!=3){
+        if(parts.length!=4){
             throw new ProtocolException("Mensaje Incorrecto");
         }else
         {
             this.idTransaccion=parts[0];
             this.codVoucher=parts[1];
-            this.confirmacion=parts[2];
+            this.fecha=parts[2];
+            this.confirmacion=parts[3];
         }
         
         if(this.confirmacion.equals("OK"))
         {
-            this.respuesta="Transacción "+this.idTransaccion+" Voucher #: "+this.codVoucher+" aceptada y procesada";
+            this.respuesta="Transacción "+this.idTransaccion+" Voucher #"+this.codVoucher+" aceptada y procesada. Fecha: "+this.fecha;
         }else
         {
             this.respuesta="Transaccaión rechazada";

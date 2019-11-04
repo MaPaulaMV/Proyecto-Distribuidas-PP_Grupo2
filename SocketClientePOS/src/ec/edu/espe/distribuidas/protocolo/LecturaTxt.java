@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class LecturaTxt {
     
     private static final String SEPARATOR=Pattern.quote("|");
-    String rutaAp = "src/tarjetas.txt";
+    String rutaAp = "ArchivosTarjetas/Tarjetas.txt";
     
        
     
