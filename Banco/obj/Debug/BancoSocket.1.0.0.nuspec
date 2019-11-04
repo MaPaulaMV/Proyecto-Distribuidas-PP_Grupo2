@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>BancoSocket</id>
+    <version>1.0.0</version>
+    <authors>BancoSocket</authors>
+    <owners>BancoSocket</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0">
+        <dependency id="MySql.Data" version="8.0.18" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\sxaizaga\source\repos\BancoSocket\bin\Debug\netcoreapp3.0\BancoSocket.runtimeconfig.json" target="lib\netcoreapp3.0\BancoSocket.runtimeconfig.json" />
+    <file src="C:\Users\sxaizaga\source\repos\BancoSocket\bin\Debug\netcoreapp3.0\BancoSocket.dll" target="lib\netcoreapp3.0\BancoSocket.dll" />
+  </files>
+</package>
