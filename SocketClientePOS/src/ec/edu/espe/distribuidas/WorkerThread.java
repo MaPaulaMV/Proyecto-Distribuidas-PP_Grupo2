@@ -38,6 +38,7 @@ public class WorkerThread extends Thread {
             inp = socketCliente.getInputStream();
             brinp = new BufferedReader(new InputStreamReader(inp));
             out = new DataOutputStream(socketCliente.getOutputStream());
+            compra.newTarjeta();
             compra.compraMonto();
             compra.genMese();
             compra.marshall();

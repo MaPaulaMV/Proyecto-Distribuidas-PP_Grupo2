@@ -1,18 +1,16 @@
 
 package ec.edu.espe.distribuidas.protocolo;
 
-<<<<<<< HEAD
-=======
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.net.ProtocolException;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author pc1
- */
->>>>>>> 8dc23216fb086ba322429d7f59b0b0114652a725
 public class ComprarRes {
-    private static final String SEPARATOR=Pattern.quote("|");;
+    private static final String SEPARATOR=Pattern.quote("|");
     private String idTransaccion;
     private String codVoucher;
     private String mensaje;
