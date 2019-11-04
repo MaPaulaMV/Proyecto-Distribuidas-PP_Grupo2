@@ -2,6 +2,7 @@
 package ec.edu.espe.distribuidas;
 
 import ec.edu.espe.distribuidas.protocolo.RegistroReq;
+import ec.edu.espe.distribuidas.protocolo.RegistroRes;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,13 +18,17 @@ public class SocketCliente {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         int index=1;
-        Socket socketRGP=new Socket("localhost", 666);
+        Socket socketRGP=new Socket("25.76.226.113", 1234);
+        //peticion
         
-        RegistroPOS(socketRGP);
-        while(true){
-            new WorkerThread(new Socket("localhost", 666)).start();
-            
-            Thread.sleep(300);
+        RegistroRes res = new RegistroRes(RegistroPOS(socketRGP));
+        if(res.unmarshal())
+        {
+            while (true) {
+                new WorkerThread(new Socket("25.76.226.113", 1234)).start();
+
+                Thread.sleep(300);
+            }
         }
 
     }
@@ -34,19 +39,24 @@ public class SocketCliente {
         return lec.readLine();
     }
     
-    public static void RegistroPOS(Socket socketRGP) throws IOException
+    public static String RegistroPOS(Socket socketRGP) throws IOException
     {
         RegistroReq req = new RegistroReq();
         InputStream inp = socketRGP.getInputStream();
         BufferedReader brinp = new BufferedReader(new InputStreamReader(inp));
         DataOutputStream out = new DataOutputStream(socketRGP.getOutputStream());
+        String message="";
         try {
             req.marshall();
             out.writeBytes(req.getMensaje() + "\n");
             out.flush();
+            //Leer el mensaje
+            message=brinp.readLine();
             socketRGP.close();
+            System.out.println(message);
         } catch (Exception e) {
         }
+        return message;
     }
     private static final Logger LOG = Logger.getLogger(SocketCliente.class.getName());
 

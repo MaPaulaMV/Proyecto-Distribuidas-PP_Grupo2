@@ -1,14 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ec.edu.espe.distribuidas.protocolo;
 
-/**
- *
- * @author Paula
- */
+import java.net.ProtocolException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+
 public class RegistroRes {
+    private static final String SEPARATOR=Pattern.quote("|");
+    private String mensaje;
+
+    public RegistroRes(String mensaje) {
+        this.mensaje = mensaje;
+    }
     
+    
+    
+    public boolean unmarshal() throws ProtocolException 
+    {
+       String parts [] =this.mensaje.split(SEPARATOR);
+       if(parts.length!=3){
+            throw new ProtocolException("Mensaje Incorrecto");
+        }
+       if(parts[2].equals("OK"))
+       {
+           return true;
+       }
+        else
+       {
+           return false;
+       }
+        
+    }
 }
