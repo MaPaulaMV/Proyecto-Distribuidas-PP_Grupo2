@@ -1,8 +1,6 @@
 
 package ec.edu.espe.distribuidas.protocolo;
 
-<<<<<<< HEAD
-=======
 import java.net.ProtocolException;
 import java.util.regex.Pattern;
 
@@ -10,7 +8,6 @@ import java.util.regex.Pattern;
  *
  * @author pc1
  */
->>>>>>> 8dc23216fb086ba322429d7f59b0b0114652a725
 public class ComprarRes {
     private static final String SEPARATOR=Pattern.quote("|");;
     private String idTransaccion;
