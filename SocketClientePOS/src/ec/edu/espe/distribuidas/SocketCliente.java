@@ -20,6 +20,7 @@ public class SocketCliente {
         Socket socketRGP=new Socket("localhost", 666);
         
         RegistroPOS(socketRGP);
+        
         while(true){
             new WorkerThread(new Socket("localhost", 666)).start();
             
