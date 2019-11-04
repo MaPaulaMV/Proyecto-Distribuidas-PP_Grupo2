@@ -36,7 +36,7 @@ namespace BancoSocket
             //Console.WriteLine("Conexion con la base");
         }
 
-        public MySqlConnection conectar()
+        public void conectar()
         {
             try
             {
@@ -47,10 +47,9 @@ namespace BancoSocket
             {
                 Console.WriteLine(e.Message);
             }
-            return connection;
         }
 
-        public void desconectar(MySqlConnection connection)
+        public void desconectar()
         {
             try
             {
@@ -62,9 +61,10 @@ namespace BancoSocket
             }
         }
 
-        public String ConsultaTarjeta(MySqlConnection connection,String tarjeta)//, String cvv, String fecha)
+        public String ConsultaTarjeta(String tarjeta)//, String cvv, String fecha)
         {
             String result=null;
+            conectar();
             MySqlCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT CVV,FECHA_EXP FROM tarjeta where NUM_TARJETA like " + tarjeta + " ;";
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -79,12 +79,14 @@ namespace BancoSocket
                     result = row[0] + "|" + row[1];
                     Console.Write(tarjeta+"|"+result);
                 }
+                desconectar();
             }
             else
             {
                 Console.WriteLine("No se encontraron datos.");
                 result = "1|Error";
             }
+            
             return tarjeta + "|" + result;
         }       
 

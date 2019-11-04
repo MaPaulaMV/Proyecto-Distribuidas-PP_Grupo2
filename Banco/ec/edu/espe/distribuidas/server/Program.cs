@@ -7,16 +7,19 @@ using System.Text;
 namespace BancoSocket
 {
     class Program
+        
     {
+        static Conexion conexion;
         static void Main(string[] args)
         {
-            
+            conexion = new Conexion();
             Console.WriteLine("Hello World!");
             Conectar();  //Llamar a función Conectar, es ajeno al tema
             
 
 
         }
+        
         public static void Conectar()
         {
            
@@ -35,10 +38,10 @@ namespace BancoSocket
                 int clientes = 0;
                 while (true)
                 {
-                    //int wait = rnd.Next(500);
-                    //Console.WriteLine("Espera "+wait);
+                    int wait = rnd.Next(500);
+                    Console.WriteLine("Espera "+wait);
                     clientes++;
-                    new WorkerThread(miPrimerSocket.Accept(),clientes).run();                                      
+                    new WorkerThread(miPrimerSocket.Accept(), clientes, conexion).run();                                      
                     Console.WriteLine(clientes+"  ");
                     Thread.Sleep(1000);
                 }

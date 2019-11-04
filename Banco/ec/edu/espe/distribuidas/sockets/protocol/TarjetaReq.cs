@@ -20,7 +20,10 @@ namespace BancoSocket
             this.Mensaje=mensaje;
         }
 
-        public string NumTarjeta { get => numTarjeta; set => numTarjeta = value; }
+        public string NumTarjeta { 
+            get => numTarjeta; 
+            set => numTarjeta = value; 
+        }
         public string Cvv { get => cvv; set => cvv = value; }
         public string Fecha { get => fecha; set => fecha = value; }
         public string Transaccion { get => transaccion; set => transaccion = value; }

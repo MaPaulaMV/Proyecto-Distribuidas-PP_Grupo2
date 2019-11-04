@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using BancoSocket.ec.edu.espe.distribuidas.sockets.protocol;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
@@ -9,9 +12,11 @@ namespace BancoSocket
     class WorkerThread
     {
         private Socket socket;
+        Conexion conexion;
         int j = 0;
-        public WorkerThread(Socket socket, int j)
+        public WorkerThread(Socket socket, int j,Conexion conexion)
         {
+            this.conexion = conexion;
             this.socket = socket;
             this.j = j;
         }
@@ -30,16 +35,24 @@ namespace BancoSocket
                 ASCIIEncoding asen = new ASCIIEncoding();
                 _ = Convert.ToChar(b[i]);
                 mensaje = mensaje+Convert.ToChar(b[i]);
-                Console.Write(mensaje);
-                //Operaciones opera = new Operaciones();
-                //validez = opera.ValidarTarjeta("4929186357873", "74", "19-03-19");
-                //Console.WriteLine(validez);
+                
+                
             }
+            Console.Write("Mensaje: " + mensaje);
+            TarjetaReq reqT = new TarjetaReq(mensaje);
+            reqT.unmarshall();
+            Tarjeta tarjetaOp= new Tarjeta();
+            String valid = tarjetaOp.ValidarTarjeta(reqT.NumTarjeta, reqT.Cvv, reqT.Fecha, conexion);
+            TarjetaRes resT = new TarjetaRes(reqT.Transaccion,reqT.Referencia,valid);
+            resT.marshall();
+            Console.WriteLine("Mensaje de salida" + resT.Mensaje);
             j++;
-            byte[] byData = System.Text.Encoding.ASCII.GetBytes("que mas mijin.... Att:ElBanco"+ j+ "\n");
-            //byte[] byData = System.Text.Encoding.ASCII.GetBytes(validez + "\n");
+            //byte[] byData = System.Text.Encoding.ASCII.GetBytes("que mas mijin.... Att:ElBanco"+ j+ "\n");
+            byte[] byData = System.Text.Encoding.ASCII.GetBytes(resT.Mensaje);
+            String datas=resT.Mensaje;
+            
             socket.Send(byData);
-            //socket.Close();
+            socket.Close();
         }
 
         public void start() { 

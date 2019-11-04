@@ -9,11 +9,13 @@ namespace BancoSocket.ec.edu.espe.distribuidas.sockets.protocol
         private String transaccion;
         private String referencia;
         private String mensaje;
-        private int validez;
+        private String validez;
         private const String SEPARATOR = "|";
         private String fecha;
 
-        public TarjetaRes(String transaccion, String referencia,int validez)
+        public string Mensaje { get => mensaje; set => mensaje = value; }
+
+        public TarjetaRes(String transaccion, String referencia,String validez)
         {
             this.transaccion = transaccion;
             this.referencia = referencia;
@@ -32,17 +34,13 @@ namespace BancoSocket.ec.edu.espe.distribuidas.sockets.protocol
         {
             if(this.validez!=null)
             {
-                mensaje = transaccion +TarjetaRes.SEPARATOR+
-                          referencia+TarjetaRes.SEPARATOR+
-                          fecha+TarjetaRes.SEPARATOR+
-                          "OK";
+                Mensaje = transaccion+TarjetaRes.SEPARATOR+referencia+TarjetaRes.SEPARATOR+fecha+TarjetaRes.SEPARATOR+"OK";
+                Console.Beep();
             }
             else
             {
-                mensaje = transaccion + TarjetaRes.SEPARATOR +
-                          referencia + TarjetaRes.SEPARATOR +
-                          fecha + TarjetaRes.SEPARATOR +
-                          "NK";
+                Mensaje = transaccion+TarjetaRes.SEPARATOR+referencia+TarjetaRes.SEPARATOR+fecha+TarjetaRes.SEPARATOR+"NK";
+                Console.Beep();
             }
         }
 

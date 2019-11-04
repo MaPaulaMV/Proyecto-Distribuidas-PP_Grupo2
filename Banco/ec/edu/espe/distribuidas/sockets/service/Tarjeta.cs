@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,12 @@ namespace BancoSocket
 {
     class Tarjeta
     {
-        Conexion conexion = new Conexion();
-        public String ValidarTarjeta(String tarjeta,String cvv, String fecha)
+        public Tarjeta()
+        {
+
+        }
+        
+        public String ValidarTarjeta(String tarjeta,String cvv, String fecha, Conexion conexion)
         {
             String result = null;
             String data=conexion.ConsultaTarjeta(tarjeta);
@@ -18,11 +23,11 @@ namespace BancoSocket
             if (tarjeta ==tar && ccv==cvv && expi==fecha)
             {
                 
-                result = "Valores correctos";
+                result = "OK";
             }
             else
             {
-                result = "No existe tarjeta";
+                result = null;
             }
 
             return result;
