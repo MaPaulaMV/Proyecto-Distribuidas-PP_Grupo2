@@ -1,6 +1,7 @@
 
 package ec.edu.espe.distribuidas.protocolo;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.net.ProtocolException;
 import java.util.regex.Pattern;
+
+
+import java.net.ProtocolException;
+import java.util.regex.Pattern;
+
 
 public class ComprarRes {
     private static final String SEPARATOR=Pattern.quote("|");
