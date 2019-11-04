@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("BancoPro")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("BancoSocket")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("BancoPro")]
-[assembly: System.Reflection.AssemblyTitleAttribute("BancoPro")]
+[assembly: System.Reflection.AssemblyProductAttribute("BancoSocket")]
+[assembly: System.Reflection.AssemblyTitleAttribute("BancoSocket")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
