@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2019 a las 19:43:02
+-- Tiempo de generación: 04-11-2019 a las 19:57:46
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -260,7 +260,8 @@ CREATE TABLE `transaccion` (
   `MONTO` decimal(12,2) NOT NULL,
   `MESES` int(11) NOT NULL,
   `FECHA` datetime NOT NULL,
-  `ESTADO` varchar(3) NOT NULL DEFAULT 'CON'
+  `ESTADO` varchar(3) NOT NULL DEFAULT 'CON',
+  `REFERENCIA_VOUCHER` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
