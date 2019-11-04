@@ -1,6 +1,7 @@
 
 package ec.edu.espe.distribuidas;
 
+import ec.edu.espe.distribuidas.protocolo.RegistroReq;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,12 +11,13 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class prueba extends Thread {
+public class WorkerThread extends Thread {
 
     private Socket socketCliente;
+    private Boolean ban;
     public static int index =1;
 
-    public prueba(Socket sc) {
+    public WorkerThread(Socket sc) {
 
         this.socketCliente = sc;
     }
@@ -25,35 +27,21 @@ public class prueba extends Thread {
         InputStream inp = null;
         BufferedReader brinp = null;
         DataOutputStream out = null;
+        RegistroReq req=null;
         try {
             inp = socketCliente.getInputStream();
-        } catch (IOException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        brinp = new BufferedReader(new InputStreamReader(inp));
-        try {
+            brinp = new BufferedReader(new InputStreamReader(inp));
             out = new DataOutputStream(socketCliente.getOutputStream());
-        } catch (IOException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             out.writeBytes("hola" + index + "\n");
-        } catch (IOException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String respose = null;
-        try {
+            String respose = null;
             respose = brinp.readLine();
+            System.out.println(respose +"->"+index);
+            index++;
         } catch (IOException ex) {
             Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(respose +"->"+index);
-        index++;
+        
     }
 
 }
