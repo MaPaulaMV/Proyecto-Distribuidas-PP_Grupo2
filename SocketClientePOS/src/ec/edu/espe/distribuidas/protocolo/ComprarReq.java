@@ -137,8 +137,11 @@ public class ComprarReq {
     
     public void marshall()
     {
-        this.mensaje=codCompra+"|"+this.idTrans+"|"+this.numTarjet+"|"+this.cvv+"|"+this.fechaExp
-        +this.valorCompra+"|"+this.valorIva+"|"+this.montoFinal+"|"+this.numMeses+"|"+this.codigoVoucher;
+        this.mensaje=codCompra+"|"+this.idTrans+"|"+this.numTarjet+"|"+this.cvv+"|"+this.fechaExp+"|"
+        +this.valorCompra.setScale(2, this.valorCompra.ROUND_CEILING).toPlainString()+"|"
+        +this.valorIva.setScale(2, this.valorIva.ROUND_CEILING).toPlainString()+"|"
+        +this.montoFinal.setScale(2, this.montoFinal.ROUND_CEILING).toPlainString()+"|"
+        +this.numMeses+"|"+this.codigoVoucher;
     }
    
     

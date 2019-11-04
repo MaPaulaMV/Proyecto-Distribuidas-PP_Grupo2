@@ -20,11 +20,7 @@ public class RegistroRes {
 
     public void setIdTrans(String idTrans) {
         this.idTrans = idTrans;
-    }
-    
-    
-    
-    
+    }    
     
     public boolean unmarshal() throws ProtocolException 
     {
