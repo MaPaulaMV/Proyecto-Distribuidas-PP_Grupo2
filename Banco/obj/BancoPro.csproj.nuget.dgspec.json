@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj": {}
+    "C:\\Users\\sxaizaga\\source\\repos\\BancoPro\\BancoPro.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj": {
+    "C:\\Users\\sxaizaga\\source\\repos\\BancoPro\\BancoPro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj",
-        "projectName": "BancoSocket",
-        "projectPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj",
+        "projectUniqueName": "C:\\Users\\sxaizaga\\source\\repos\\BancoPro\\BancoPro.csproj",
+        "projectName": "BancoPro",
+        "projectPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoPro\\BancoPro.csproj",
         "packagesPath": "C:\\Users\\sxaizaga\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\obj\\",
+        "outputPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoPro\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -41,6 +41,16 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.18, )"
+            },
+            "MySql.Data.Entity": {
+              "target": "Package",
+              "version": "[6.10.9, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
