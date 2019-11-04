@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/11/2019 13:55:46                           */
+/* Created on:     4/11/2019 14:03:41                           */
 /*==============================================================*/
 
 
@@ -58,9 +58,10 @@ create table TRANSACCION
    TIPO                 varchar(3) not null default 'COM',
    VALOR_COMPRA         numeric(12,2) not null,
    IMPUESTO             numeric(12,2) not null,
-   MONTO                numeric(12,2),
+   MONTO                numeric(12,2) not null,
    FECHA                datetime not null,
    ESTADO               varchar(3) not null default 'CON',
+   REFERENCIA_VOUCHER   varchar(5) not null,
    primary key (COD_TRANSACCION)
 );
 

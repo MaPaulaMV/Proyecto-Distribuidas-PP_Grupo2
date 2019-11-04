@@ -2,7 +2,7 @@
 package ec.edu.espe.distribuidas;
 
 import ec.edu.espe.distribuidas.protocolo.ComprarReq;
-import ec.edu.espe.distribuidas.protocolo.RegistroReq;
+import ec.edu.espe.distribuidas.protocolo.ComprarRes;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -43,10 +43,12 @@ public class WorkerThread extends Thread {
             compra.marshall();
             out.writeBytes(compra.getMensaje()+"\n");
             out.flush();
-            String respose = null;
-            respose = brinp.readLine();
-            System.out.println(respose +"->"+index);
-            index++;
+            String respuestaInt=brinp.readLine();
+            System.out.println(respuestaInt);
+            ComprarRes res=new ComprarRes(respuestaInt);
+            res.unmarshall();
+            System.out.println(res.getRespuesta());
+            
         } catch (IOException ex) {
             Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
