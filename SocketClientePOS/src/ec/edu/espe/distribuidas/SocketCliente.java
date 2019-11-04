@@ -21,7 +21,7 @@ public class SocketCliente {
         Socket socketRGP=new Socket("25.76.226.113", 1234);
         //peticion
         
-<<<<<<< HEAD
+
         RegistroRes res = new RegistroRes(RegistroPOS(socketRGP));
         if(res.unmarshal())
         {
@@ -30,15 +30,8 @@ public class SocketCliente {
 
                 Thread.sleep(300);
             }
-=======
-        RegistroPOS(socketRGP);
-        
-        while(true){
-            new WorkerThread(new Socket("localhost", 666)).start();
-            
-            Thread.sleep(300);
->>>>>>> 8abe476311f78250dd5c648c37fd2ac3df73af31
         }
+
 
     }
 
