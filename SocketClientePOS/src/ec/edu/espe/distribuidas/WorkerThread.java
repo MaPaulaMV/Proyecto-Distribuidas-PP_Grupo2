@@ -1,6 +1,7 @@
 
 package ec.edu.espe.distribuidas;
 
+import ec.edu.espe.distribuidas.protocolo.ComprarReq;
 import ec.edu.espe.distribuidas.protocolo.RegistroReq;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -16,10 +17,14 @@ public class WorkerThread extends Thread {
     private Socket socketCliente;
     private Boolean ban;
     public static int index =1;
+    private static String id;
+    private int cont;
 
-    public WorkerThread(Socket sc) {
+    public WorkerThread(Socket sc, String id, int cont) {
 
         this.socketCliente = sc;
+        this.id=id;
+        this.cont=cont;
     }
 
     @Override
@@ -27,12 +32,16 @@ public class WorkerThread extends Thread {
         InputStream inp = null;
         BufferedReader brinp = null;
         DataOutputStream out = null;
-        RegistroReq req=null;
+        
+        ComprarReq compra= new ComprarReq(this.id, this.cont);
         try {
             inp = socketCliente.getInputStream();
             brinp = new BufferedReader(new InputStreamReader(inp));
             out = new DataOutputStream(socketCliente.getOutputStream());
-            out.writeBytes("hola" + index + "\n");
+            compra.compraMonto();
+            compra.genMese();
+            compra.marshall();
+            out.writeBytes(compra.getMensaje()+"\n");
             out.flush();
             String respose = null;
             respose = brinp.readLine();

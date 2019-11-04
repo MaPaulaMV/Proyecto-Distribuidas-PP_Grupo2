@@ -9,10 +9,20 @@ import java.util.regex.Pattern;
 public class RegistroRes {
     private static final String SEPARATOR=Pattern.quote("|");
     private String mensaje;
-
+    private String idTrans="";
     public RegistroRes(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public String getIdTrans() {
+        return idTrans;
+    }
+
+    public void setIdTrans(String idTrans) {
+        this.idTrans = idTrans;
+    }
+    
+    
     
     
     
@@ -24,6 +34,7 @@ public class RegistroRes {
         }
        if(parts[2].equals("OK"))
        {
+           this.idTrans=parts[0];
            return true;
        }
         else

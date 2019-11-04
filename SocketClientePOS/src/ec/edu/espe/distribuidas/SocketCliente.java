@@ -16,19 +16,19 @@ import java.util.logging.Logger;
 public class SocketCliente {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
+        String id="";    
         int index=1;
         Socket socketRGP=new Socket("25.76.226.113", 1234);
         //peticion
-        
 
         RegistroRes res = new RegistroRes(RegistroPOS(socketRGP));
         if(res.unmarshal())
         {
+            id= res.getIdTrans();
             while (true) {
-                new WorkerThread(new Socket("25.76.226.113", 1234)).start();
-
-                Thread.sleep(300);
+                new WorkerThread(new Socket("25.76.226.113", 1234),id,index).start();
+                 index++;
+                Thread.sleep(2000);
             }
         }
 
