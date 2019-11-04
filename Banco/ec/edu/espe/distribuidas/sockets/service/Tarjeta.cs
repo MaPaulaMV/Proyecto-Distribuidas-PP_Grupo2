@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BancoSocket
 {
-    class Operaciones
+    class Tarjeta
     {
         Conexion conexion = new Conexion();
         public String ValidarTarjeta(String tarjeta,String cvv, String fecha)
@@ -22,7 +22,6 @@ namespace BancoSocket
             }
             else
             {
-                
                 result = "No existe tarjeta";
             }
 

@@ -6062,11 +6062,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj",
+      "projectUniqueName": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
       "projectName": "BancoSocket",
-      "projectPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\BancoSocket.csproj",
+      "projectPath": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
       "packagesPath": "C:\\Users\\sxaizaga\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sxaizaga\\source\\repos\\BancoSocket\\obj\\",
+      "outputPath": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

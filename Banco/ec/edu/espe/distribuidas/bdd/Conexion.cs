@@ -7,35 +7,54 @@ namespace BancoSocket
 {
     class Conexion
     {
-        static string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=facilita;database=proyecto;";
-        MySqlConnection databaseConnection;
-        
+        //static string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=facilita;database=proyecto;";
+        //MySqlConnection databaseConnection;
+        private MySqlConnection connection;
+        private string server;
+        private string database;
+        private string user;
+        private string password;
+        private string port;
+        static string connectionString;
+
+
+        private string sslM;
+
         public Conexion()
         {
-            databaseConnection = new MySqlConnection(connectionString);
-            Console.WriteLine("Conexion con la base");
+            server = "localhost";
+            database = "proyecto";
+            user = "root";
+            password = "facilita";
+            port = "3306";
+            sslM = "none";
+
+            connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", server, port, user, password, database, sslM);
+
+            connection = new MySqlConnection(connectionString);
+            //databaseConnection = new MySqlConnection(connectionString);
+            //Console.WriteLine("Conexion con la base");
         }
 
-        
-
-        public void conectar()
+        public MySqlConnection conectar()
         {
             try
             {
-                // Abre la base de datos
-                databaseConnection.Open();
+                connection.Open();
+                Console.WriteLine("Base conectada");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+            return connection;
         }
 
-        public void desconectar()
+        public void desconectar(MySqlConnection connection)
         {
             try
             {
-                databaseConnection.Close();
+                connection.Close();
             }
             catch(Exception e)
             {
@@ -43,12 +62,11 @@ namespace BancoSocket
             }
         }
 
-        public String ConsultaTarjeta(String tarjeta)//, String cvv, String fecha)
+        public String ConsultaTarjeta(MySqlConnection connection,String tarjeta)//, String cvv, String fecha)
         {
             String result=null;
-            MySqlCommand cmd = databaseConnection.CreateCommand();
+            MySqlCommand cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT CVV,FECHA_EXP FROM tarjeta where NUM_TARJETA like " + tarjeta + " ;";
-            conectar();
             MySqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -67,7 +85,6 @@ namespace BancoSocket
                 Console.WriteLine("No se encontraron datos.");
                 result = "1|Error";
             }
-            desconectar();
             return tarjeta + "|" + result;
         }       
 
