@@ -49,7 +49,7 @@ public class WorkerThread extends Thread {
             //System.out.println(respuestaInt);
             ComprarRes res=new ComprarRes(respuestaInt);
             res.unmarshall();
-            //System.out.println(res.getRespuesta());
+            System.out.println(res.getRespuesta());
             
         } catch (IOException ex) {
             Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
