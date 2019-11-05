@@ -56,6 +56,8 @@ namespace BancoSocket
                     Console.WriteLine(response);
                     break;
                 case "CNC":
+                    TarjetaReq req = new TarjetaReq(mensaje);
+                    req.unmarshall();
                     response = "AUN NO IMPLEMENTAMOS :'V";
                     break;
             }
