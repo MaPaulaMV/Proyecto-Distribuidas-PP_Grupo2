@@ -10,7 +10,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import socket
-import os
 
 class Aplicacion():
     ''' Clase Aplicacion '''
@@ -25,7 +24,7 @@ class Aplicacion():
     #######################################################################
     ##                            FUNCIONES                              ##
     #######################################################################
-    def marshallCompra(self,id_tran,tar,cvv,mes,ani,mon,iva,meses,vou,idPos):
+    def marshallCompra(self,id_tran,tar,cvv,mes,ani,mon,iva,meses,vou):
         #print(tit+"|"+tar+"|"+mes+"|"+ani+"|"+cvv+"|"+mon+"|"+meses)
         m = float(mon)
         if iva=="0%":
@@ -38,7 +37,7 @@ class Aplicacion():
         mi=round(monto_iva,2)
         mt=round(monto_total,2)           
         msgC_var = tk.StringVar()
-        msgC_var = "CMP"+"|"+id_tran+"|"+tar+"|"+cvv+"|"+mes+"/"+ani+"|"+mon+"|"+str(mi)+"|"+str(mt)+"|"+meses+"|"+vou+"|"+idPos+"\n"
+        msgC_var = "CMP"+"|"+id_tran+"|"+tar+"|"+cvv+"|"+mes+"/"+ani+"|"+mon+"|"+str(mi)+"|"+str(mt)+"|"+meses+"|"+vou
         print(msgC_var)
         # Establecemos el tipo de socket/conexion
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -59,38 +58,11 @@ class Aplicacion():
         if resp.find("OK")>0:
             print('COMPRA OK.\n')
         else:
-            print('ERROR DE COMPRA.\n')
+            print('ERROR DE INGRESO.\n')
 
-    def marshallCancelarCompra(self,id_tran,tar,cvv,mes,ani,vou,pin,idPos):
-        #print(tit+"|"+tar+"|"+mes+"|"+ani+"|"+cvv+"|"+mon+"|"+meses)          
-        msgC_var = tk.StringVar()
-        #num_voucher=num_voucher+1
-        msgC_var = "CNP"+"|"+id_tran+"|"+pin+"|"+tar+"|"+cvv+"|"+mes+"/"+ani+"|"+vou+"|"+idPos+"\n"
-        print(msgC_var)
-        # Establecemos el tipo de socket/conexion
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        port = 1234 # Puerto de comunicacion
-        # Realizamos la conexion al la IP y puerto
-        #sock.connect(('25.76.226.113',port))
-        sock.connect(('localhost',port))
-        # Enviamos un mensaje
-        sock.send(msgC_var.encode())
-        # Leemos los datos del servidor
-        data = sock.recv(4096)
-        # Cerramos el socket
-        sock.close()
-        # Mostramos los datos recibidos
-        #print(data.decode())
-        resp = data.decode()
-        print(resp)
-        if resp.find("OK")>0:
-            print('CaCANCELACION OK.\n')
-        else:
-            print('ERROR DE CANCELACION.\n')
-
-    def marshallLogin(self, idPos, pin):
+    def marshallLogin(self, id, pin):
         msg_var = tk.StringVar()
-        msg_var = "RGP|1723551057001|"+idPos+"|"+pin+"\n"
+        msg_var = "RGP|1723551057001|"+id+"|"+pin+"\n"
         print(msg_var) 
         # Establecemos el tipo de socket/conexion
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -111,9 +83,9 @@ class Aplicacion():
         separador = "|"
         resp_sep = resp.split(separador)
         id_tran = resp_sep[0]
-        print(resp_sep[0])
+        #print(resp_sep[0])
         if resp.find("OK")>0:
-            self.menu(id_tran, idPos)
+            self.menu(id_tran)
         else:
             print('ERROR DE INGRESO.\n')
 
@@ -137,8 +109,8 @@ class Aplicacion():
         ruc_label.pack(side=TOP, padx=5, pady=5)
         id_label = ttk.Label(self.raiz, text='ID POST:')
         id_label.pack(side=TOP, padx=5, pady=5)
-        idPos_var = tk.StringVar()
-        cuadro_id = Entry(self.raiz, textvariable=idPos_var)
+        id_var = tk.StringVar()
+        cuadro_id = Entry(self.raiz, textvariable=id_var)
         cuadro_id.pack(side=TOP, padx=0, pady=0)
         pin_label = ttk.Label(self.raiz, text='PIN: ')
         pin_label.pack(side=TOP, padx=5, pady=5)
@@ -146,42 +118,42 @@ class Aplicacion():
         cuadro_pin = Entry(self.raiz, show ="*", textvariable=pin_var)
         cuadro_pin.pack(side=TOP, padx=0, pady=0)
         msg_var = tk.StringVar()
-        boton = ttk.Button(self.raiz, text='ACCEDER', command=lambda: self.marshallLogin(idPos_var.get(),pin_var.get()))
+        boton = ttk.Button(self.raiz, text='ACCEDER', command=lambda: self.marshallLogin(id_var.get(),pin_var.get()))
         boton.pack(side=LEFT, padx=10, pady=10)
         boton = ttk.Button(self.raiz, text='SALIR', command=self.raiz.destroy)
         boton.pack(side=RIGHT, padx=10, pady=10)
         self.raiz.mainloop()
 
-    def cancelar_compra(self,id_tran, idPos):
-        self.cancelar_compra = Toplevel()
-        self.cancelar_compra.geometry('300x500+500+50')
-        self.cancelar_compra.resizable(0,0)
-        ident = self.cancelar_compra.winfo_id()
+    def cancelar_compra(self,id_tran):
+        self.compra = Toplevel()
+        self.compra.geometry('300x500+500+50')
+        self.compra.resizable(0,0)
+        ident = self.compra.winfo_id()
         # Construye mensaje de la barra de título
         titulo = "CANCELAR COMPRA #"+ str(ident)
-        self.cancelar_compra.title(titulo)
-        login_label = ttk.Label(self.cancelar_compra, text='CANCELAR COMPRA')
+        self.compra.title(titulo)
+        login_label = ttk.Label(self.compra, text='COMPRA')
         login_label.pack(side=TOP, padx=5, pady=5)
         ###
         #-----------Seccion numero tarjeta----------------
-        tarjeta_label= ttk.Label(self.cancelar_compra, text="Número de la tarjeta:")
+        tarjeta_label= ttk.Label(self.compra, text="Número de la tarjeta:")
         tarjeta_label.pack(side=TOP, padx=0, pady=0)
         tarjeta_var = tk.StringVar()
-        cuadro_tarjeta=Entry(self.cancelar_compra, textvariable=tarjeta_var)
+        cuadro_tarjeta=Entry(self.compra, textvariable=tarjeta_var)
         cuadro_tarjeta.pack(side=TOP, padx=0, pady=0)
         #-----------Seccion cvv----------
-        cvv_label= ttk.Label(self.cancelar_compra, text="Código de seguridad (CVV):")
+        cvv_label= ttk.Label(self.compra, text="Código de seguridad (CVV):")
         cvv_label.pack(side=TOP, padx=5, pady=5)
         cvv_var = tk.StringVar()
-        cuadro_cvv=Entry(self.cancelar_compra, textvariable=cvv_var)
+        cuadro_cvv=Entry(self.compra, textvariable=cvv_var)
         cuadro_cvv.pack(side=TOP, padx=5, pady=5)
         #-----------Seccion fecha caducidad-------------
-        fechaCad_label=ttk.Label(self.cancelar_compra,text="FECHA DE EXPIRACIÓN")
+        fechaCad_label=ttk.Label(self.compra,text="FECHA CADUCIDAD")
         fechaCad_label.pack(side=TOP, padx=0, pady=0)
-        mesCad_label=ttk.Label(self.cancelar_compra,text="Mes:")
+        mesCad_label=ttk.Label(self.compra,text="Mes:")
         mesCad_label.pack(side=TOP, padx=0, pady=0)
         mes_var = tk.StringVar()
-        mesCombo=ttk.Combobox(self.cancelar_compra,
+        mesCombo=ttk.Combobox(self.compra,
                             values=["01",
                                     "02",
                                     "03",
@@ -196,10 +168,10 @@ class Aplicacion():
                                     "12",], textvariable=mes_var)
         mesCombo.pack(side=TOP, padx=0, pady=0)
         mesCombo.current(0)
-        anioCad_label=ttk.Label(self.cancelar_compra,text="Anio:")
+        anioCad_label=ttk.Label(self.compra,text="Anio:")
         anioCad_label.pack(side=TOP, padx=0, pady=0)
         anio_var = tk.StringVar()
-        anioCombo=ttk.Combobox(self.cancelar_compra,
+        anioCombo=ttk.Combobox(self.compra,
                             values=["19",
                                     "20",
                                     "21",
@@ -214,30 +186,45 @@ class Aplicacion():
                                     "30",], textvariable=anio_var)
         anioCombo.pack(side=TOP, padx=0, pady=0)
         anioCombo.current(0)
+        #----------- Seccion monto---------
+        monto_label= ttk.Label(self.compra, text="Monto:")
+        monto_label.pack(side=TOP, padx=5, pady=5)
+        monto_var = tk.StringVar()
+        cuadro_monto=Entry(self.compra, textvariable=monto_var)
+        cuadro_monto.pack(side=TOP, padx=5, pady=5)
+        #----------- Seccion iva ----------
+        iva_label=ttk.Label(self.compra,text="IVA:")
+        iva_label.pack(side=TOP, padx=0, pady=0)
+        iva_var = tk.StringVar()
+        ivaCombo=ttk.Combobox(self.compra,
+                            values=["0%",
+                                    "12%"], textvariable=iva_var)
+        ivaCombo.pack(side=TOP, padx=0, pady=0)
+        ivaCombo.current(0)
+        #-----------Seccion meses-------------
+        monto_label= ttk.Label(self.compra, text="Meses:")
+        monto_label.pack(side=TOP, padx=5, pady=5)
+        meses_var = tk.StringVar()
+        cuadro_meses= ttk.Entry(self.compra, textvariable=meses_var)
+        cuadro_meses.pack(side=TOP, padx=5, pady=5)
         #----Seccion N# ReferenciaVoucher-----
-        voucher_label = ttk.Label(self.cancelar_compra, text="# Referencia Voucher")
+        voucher_label = ttk.Label(self.compra, text="# Referencia Voucher")
         voucher_label.pack(side=TOP, padx=0, pady=0)
         voucher_var = tk.StringVar()
-        cuadro_voucher = Entry(self.cancelar_compra, textvariable=voucher_var)
+        cuadro_voucher = Entry(self.compra, textvariable=voucher_var)
         cuadro_voucher.pack(side=TOP, padx=0, pady=0)
-        #-----------Seccion PIN-------------
-        pin_label= ttk.Label(self.cancelar_compra, text="PIN:")
-        pin_label.pack(side=TOP, padx=5, pady=5)
-        pin_var = tk.StringVar()
-        cuadro_pin= ttk.Entry(self.cancelar_compra, textvariable=pin_var)
-        cuadro_pin.pack(side=TOP, padx=5, pady=5)
         #-----------Boton Comprar-------------
-        boton = tk.Button(self.cancelar_compra, text='ACEPTAR', 
-                           command=lambda: self.marshallCancelarCompra(id_tran,tarjeta_var.get(),
+        boton = tk.Button(self.compra, text='COMPRAR', 
+                           command=lambda: self.marshallCompra(id_tran,tarjeta_var.get(),
                            cvv_var.get(),mes_var.get(),anio_var.get(),
-                           voucher_var.get(), pin_var.get(),idPos)) 
+                           monto_var.get(),iva_var.get(),meses_var.get(),voucher_var.get())) 
         boton.pack(side=LEFT, padx=10, pady=10)
-        botonCancelar = ttk.Button(self.cancelar_compra, text='SALIR', 
-                           command=self.cancelar_compra.destroy)   
+        botonCancelar = ttk.Button(self.compra, text='CANCELAR', 
+                           command=self.compra.destroy)   
         botonCancelar.pack(side=RIGHT, padx=10, pady=10)
-        self.raiz.wait_window(self.cancelar_compra)
+        self.raiz.wait_window(self.compra)
 
-    def compra(self,id_tran, idPos):
+    def compra(self,id_tran):
         self.compra = Toplevel()
         self.compra.geometry('300x500+500+50')
         self.compra.resizable(0,0)
@@ -330,14 +317,14 @@ class Aplicacion():
         boton = tk.Button(self.compra, text='COMPRAR', 
                            command=lambda: self.marshallCompra(id_tran,tarjeta_var.get(),
                            cvv_var.get(),mes_var.get(),anio_var.get(),
-                           monto_var.get(),iva_var.get(),meses_var.get(),voucher_var.get(),idPos)) 
+                           monto_var.get(),iva_var.get(),meses_var.get(),voucher_var.get())) 
         boton.pack(side=LEFT, padx=10, pady=10)
-        botonCancelar = ttk.Button(self.compra, text='SALIR', 
+        botonCancelar = ttk.Button(self.compra, text='CANCELAR', 
                            command=self.compra.destroy)   
         botonCancelar.pack(side=RIGHT, padx=10, pady=10)
         self.raiz.wait_window(self.compra)
 
-    def menu(self, id_tran, idPos):
+    def menu(self,id_tran):
         ''' Construye una ventana MENU '''
         # Define una nueva ventana de diálogo
         self.menu = Toplevel()
@@ -363,10 +350,10 @@ class Aplicacion():
         login_label = ttk.Label(self.menu, text='MENU POS')
         login_label.pack(side=TOP, padx=5, pady=5)
         boton = ttk.Button(self.menu, text='COMPRAR', 
-                           command=lambda: self.compra(id_tran, idPos))   
+                           command=lambda: self.compra(id_tran))   
         boton.pack(side=TOP, padx=10, pady=10)
-        botonCancelar = ttk.Button(self.menu, text='CANCELAR COMPRA', 
-                           command=lambda: self.cancelar_compra(id_tran, idPos))   
+        botonCancelar = ttk.Button(self.menu, text='CANCER COMPRA', 
+                           command=self.menu.destroy)   
         botonCancelar.pack(side=TOP, padx=10, pady=10)
         botonCancelar = ttk.Button(self.menu, text='SALIR', 
                            command=self.menu.destroy)   
