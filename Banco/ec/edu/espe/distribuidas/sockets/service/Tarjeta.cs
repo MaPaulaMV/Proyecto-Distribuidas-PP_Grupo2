@@ -131,5 +131,10 @@ namespace BancoSocket
         {
             return value.ToString("yyyyMMddHHmmss");
         }
+        
+        public String Cancelacion()
+        {
+            return null;
+        }
     }
 }
