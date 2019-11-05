@@ -13,7 +13,6 @@ namespace BancoSocket
         static void Main(string[] args)
         {
             conexion = new Conexion();
-            Console.WriteLine("Hello World!");
             Conectar();  //Llamar a función Conectar, es ajeno al tema
             
 
@@ -38,8 +37,8 @@ namespace BancoSocket
                 int clientes = 0;
                 while (true)
                 {
-                    int wait = rnd.Next(500);
-                    Console.WriteLine("Espera "+wait);
+                    //int wait = rnd.Next(500);
+//                    Console.WriteLine("Espera "+wait);
                     clientes++;
                     new WorkerThread(miPrimerSocket.Accept(), clientes, conexion).run();                                      
                     Console.WriteLine(clientes+"  ");

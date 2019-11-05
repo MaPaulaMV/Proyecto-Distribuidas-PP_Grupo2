@@ -38,16 +38,18 @@ public class WorkerThread extends Thread {
             inp = socketCliente.getInputStream();
             brinp = new BufferedReader(new InputStreamReader(inp));
             out = new DataOutputStream(socketCliente.getOutputStream());
+            compra.newTarjeta();
             compra.compraMonto();
             compra.genMese();
             compra.marshall();
             out.writeBytes(compra.getMensaje()+"\n");
+            System.out.println(compra.getMensaje());
             out.flush();
             String respuestaInt=brinp.readLine();
-            System.out.println(respuestaInt);
+            //System.out.println(respuestaInt);
             ComprarRes res=new ComprarRes(respuestaInt);
             res.unmarshall();
-            System.out.println(res.getRespuesta());
+            //System.out.println(res.getRespuesta());
             
         } catch (IOException ex) {
             Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);

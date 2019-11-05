@@ -66,7 +66,40 @@ namespace BancoSocket
             String result=null;
             conectar();
             MySqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT CVV,FECHA_EXP FROM tarjeta where NUM_TARJETA like " + tarjeta + " ;";
+            cmd.CommandText = "SELECT COD_CUENTA,SALDO_DISPONIBLE,CVV,FECHA_EXP,ESTADO FROM tarjeta where NUM_TARJETA like " + tarjeta + " ;";
+            MySqlDataReader reader = cmd.ExecuteReader();
+            String res=null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // CUENTA,SALDO,CVV,FECHA,EST
+                    // Hacer algo con cada fila obtenida
+                    string[] row = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4) };
+                    res = row[0] + "|" + row[1] + "|" + row[2] + "|" + row[3] + "|" + row[4];
+                    ;
+                    //Console.WriteLine(tarjeta+"|"+result);
+                    
+                }
+                result = tarjeta + "|" + res;
+                reader.Close();
+                desconectar();
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron datos.");
+                result = null;
+            }
+            reader.Close();
+            return result;
+        }
+
+        public String RealizarConsumo(Double consumo)//, String cvv, String fecha)
+        {
+            String result = null;
+            conectar();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "Select SALDO_DISPONIBLE FROM TARJETA WHERE NUM_TARJETA LIKE " + consumo + " ;";
             MySqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
@@ -75,20 +108,21 @@ namespace BancoSocket
                 {
                     // En nuestra base de datos, el array contiene:  ID 0, FIRST_NAME 1
                     // Hacer algo con cada fila obtenida
-                    string[] row = { reader.GetString(0), reader.GetString(1) };
-                    result = row[0] + "|" + row[1];
-                    Console.Write(tarjeta+"|"+result);
+                    string[] row = { reader.GetString(0) };
+                    result = row[0];
+                    reader.Close();
                 }
                 desconectar();
             }
             else
             {
                 Console.WriteLine("No se encontraron datos.");
-                result = "1|Error";
+                result = "1|No existe la tarjeta en el sistema";
+                reader.Close();
             }
-            
-            return tarjeta + "|" + result;
-        }       
+
+            return result;
+        }
 
 
     }
