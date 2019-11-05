@@ -56,8 +56,8 @@ namespace BancoSocket
                     Console.WriteLine("Valid: " + cuentaValidacion);
                     String cobroMonto = tarjetaOp.RealizarConsumos(cuentaValidacion,conexion);
                     String registroCuentra = reqT.Referencia+"|"+reqT.Transaccion+ "|" + valid +"|"+ cuentaValidacion + "|" + reqT.Mes;
-
-                    String resRegistro=tarjetaOp.RegistroCuenta(registroCuentra,conexion); 
+                    String tipo = "COM";
+                    String resRegistro=tarjetaOp.RegistroCuenta(registroCuentra,tipo,conexion); 
                     TarjetaRes resT = new TarjetaRes(reqT.Transaccion, reqT.Referencia, valid);
                     resT.marshall();
                     response = resT.Mensaje;
@@ -67,7 +67,7 @@ namespace BancoSocket
                     TarjetaReqC req = new TarjetaReqC(mensaje);
                     req.unmarshall();
                     Tarjeta tarjeta = new Tarjeta();
-                    String validar = tarjeta.ValidarTarjetaCancelacion(req.NumTarjeta, req.Cvv, req.Fecha, conexion);
+                    String validar = tarjeta.ValidarTarjeta(req.NumTarjeta, req.Cvv, req.Fecha,"0", conexion);
 
                     Console.WriteLine("Valid: " + validar);
                     String cuentaValida = tarjeta.ConsultaCuenta(validar, conexion);
@@ -75,8 +75,8 @@ namespace BancoSocket
 
                     //String cancelacion = tarjetaOp.RealizarConsumos(cuentaValidacion, conexion);
                     String registroCuentaC = req.Referencia + "|" + req.Transaccion + "|" + validar + "|" + cuentaValida + "|" + "0";
-
-                    String resRegistroC = tarjeta.RegistroCuenta(registroCuentaC, conexion);
+                    String tipoC = "CAN";
+                    String resRegistroC = tarjeta.RegistroCuenta(registroCuentaC,tipoC, conexion);
 
 
                     TarjetaResC resp = new TarjetaResC(req.Transaccion,req.Referencia,validar);

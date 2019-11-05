@@ -1,5 +1,6 @@
 {
   "ExpandedNodes": [
+    "",
     "\\Banco",
     "\\Banco\\ec",
     "\\Banco\\ec\\edu",
@@ -7,5 +8,6 @@
     "\\Banco\\ec\\edu\\espe\\distribuidas",
     "\\Banco\\ec\\edu\\espe\\distribuidas\\server"
   ],
+  "SelectedNode": "\\Banco\\BancoSocket.sln",
   "PreviewInSolutionExplorer": false
 }

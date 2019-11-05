@@ -45,40 +45,6 @@ namespace BancoSocket
 
             return result;
         }
-
-        public String ValidarTarjetaCancelacion(String tarjeta, String cvv, String fecha, Conexion conexion)
-        {
-
-            String result = null;
-            String data = conexion.ConsultaTarjeta(tarjeta);
-            if (data == null)
-            {
-                result = null;
-            }
-            else
-            {
-                string[] words = data.Split('|');
-                // TARJETA,CUENTA,SALDO,CVV,FECHA,EST
-                String tar = words[0];
-                String cuenta = words[1];
-                String saldo = words[2];
-                String ccv = words[3];
-                String expi = words[4];
-                String est = words[5];
-                if (tarjeta == tar && ccv == cvv && expi == fecha && est == "ACT")
-                {
-                    result = "OK|" + data ;
-                }
-                else
-                {
-                    result = null;
-                }
-            }
-
-
-            return result;
-        }
-
         public String ConsultaCuenta(String validacion, Conexion conexion)
         {
             String result = null;
@@ -110,6 +76,8 @@ namespace BancoSocket
             return result;
         }
 
+    
+
         public String RealizarConsumos(String validacion, Conexion conexion)
         {
             String result = null;
@@ -129,7 +97,7 @@ namespace BancoSocket
             return result;
         }
 
-        public String RegistroCuenta(String validacion, Conexion conexion)
+        public String RegistroCuenta(String validacion,String tipo, Conexion conexion)
         {
 
             String result = null;
@@ -138,21 +106,10 @@ namespace BancoSocket
             String[] datosTarjeta = validacion.Split("|");
             String transaccion = datosTarjeta[1];
             String tarjeta = datosTarjeta[3];
-            String tipo = null;
             String referencia= datosTarjeta[0];
             String monto = datosTarjeta[9];
             String mes= datosTarjeta[14];
             
-
-            switch (tarjeta.Substring(0, 1))
-            {
-                case "4":
-                    tipo = "VIS";
-                    break;
-                case "5":
-                    tipo = "MAS";
-                    break;
-            }
             this.fecha = GetTimestamp(DateTime.Now);
             
             //String transaccion, String tarjeta, String tipo, String monto, String meses, String fecha,String referencia )

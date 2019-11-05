@@ -155,7 +155,7 @@ namespace BancoSocket
             MySqlCommand cmd = connection.CreateCommand();
             //COD_TRANSACCION,NUM_TARJETA,TIPO.VALOR_COMPRA,IMPUESTO,MONTO,MESES,FECHA,ESTADO,REFERENCIA_VOUCHER
             
-            cmd.CommandText = "INSERT INTO TRANSACCION VALUES('"+transaccion+"','"+tarjeta+"','COM','" + monto + "','" + impuesto + "','" + total + "','" + meses + "','" + fecha + "','PEN','" + referencia +"');";
+            cmd.CommandText = "INSERT INTO TRANSACCION VALUES('"+transaccion+"','"+tarjeta+"','"+tipo+"','" + monto + "','" + impuesto + "','" + total + "','" + meses + "','" + fecha + "','PEN','" + referencia +"');";
             if (cmd.ExecuteNonQuery() == 1)
             {
 
@@ -168,9 +168,27 @@ namespace BancoSocket
             desconectar();
             return result;
         }
-        public String RealizarCancelacion()
+        public String RealizarCancelacion(String transaccion, String tarjeta, String tipo, String monto, String meses, String fecha, String referencia)
         {
-            return null;
+            String result = null;
+            Double impuesto = Convert.ToDouble(monto) * 0.12;
+            Double total = Convert.ToDouble(monto) + impuesto;
+            conectar();
+            MySqlCommand cmd = connection.CreateCommand();
+            //COD_TRANSACCION,NUM_TARJETA,TIPO.VALOR_COMPRA,IMPUESTO,MONTO,MESES,FECHA,ESTADO,REFERENCIA_VOUCHER
+
+            cmd.CommandText = "INSERT INTO TRANSACCION VALUES('" + transaccion + "','" + tarjeta + "','CAN','" + monto + "','" + impuesto + "','" + total + "','" + meses + "','" + fecha + "','PEN','" + referencia + "');";
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                result = "OK";
+            }
+            else
+            {
+                result = null;
+            }
+            desconectar();
+            return result;
         }
 
 
