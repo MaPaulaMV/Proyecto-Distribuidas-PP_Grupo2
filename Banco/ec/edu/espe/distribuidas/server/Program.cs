@@ -13,10 +13,9 @@ namespace BancoSocket
         static void Main(string[] args)
         {
             conexion = new Conexion();
-            Conectar();  //Llamar a función Conectar, es ajeno al tema
             
-
-
+            Conectar();  //Llamar a función Conectar, es ajeno al tema
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-EN");
         }
         
         public static void Conectar()
