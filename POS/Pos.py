@@ -11,6 +11,7 @@ from tkinter import *
 from tkinter import ttk
 import socket
 import os
+import time
 
 class Aplicacion():
     ''' Clase Aplicacion '''
@@ -58,6 +59,7 @@ class Aplicacion():
         print(resp)
         if resp.find("OK")>0:
             print('COMPRA OK.\n')
+            self.imprimirVoucher(tar,vou,mon,mi,mt,meses,iva,idPos)
         else:
             print('ERROR DE COMPRA.\n')
 
@@ -84,7 +86,7 @@ class Aplicacion():
         resp = data.decode()
         print(resp)
         if resp.find("OK")>0:
-            print('CaCANCELACION OK.\n')
+            print('CANCELACION OK.\n')
         else:
             print('ERROR DE CANCELACION.\n')
 
@@ -116,7 +118,23 @@ class Aplicacion():
             self.menu(id_tran, idPos)
         else:
             print('ERROR DE INGRESO.\n')
-
+    
+    def imprimirVoucher(self,tar,vou,mon,mi,mt,meses,iva,idPos):
+        print("##########################################\n"+
+              "          COMPROBANTE DE VENTA            \n"+
+              "             VOUCHER #"+vou+"              \n"+
+              "##########################################\n"+
+              "NUMERO DE TARJETA:\t"+tar+"\n"+
+              "CODIGO DEL POS:\t\t"+idPos+"\n"+
+              "\tFECHA\t\tHORA\n"+
+              "\t"+time.strftime("%d/%m/%y")+"\t"+time.strftime("%H:%M:%S")+"\n"+
+              "\n"+
+              "MONTO:\t\t"+mon+"\n"+
+              "IVA:\t\t"+iva+"\n"+
+              "VALOR IVA:\t"+str(mi)+"\n"+
+              "VALOR TOTAL:\t"+str(mt)+"\n"+
+              "|######### GRACIAS POR SU COMPRA ########|\n")
+    
     #######################################################################
     ##                              VISTAS                               ##
     #######################################################################
@@ -154,7 +172,7 @@ class Aplicacion():
 
     def cancelar_compra(self,id_tran, idPos):
         self.cancelar_compra = Toplevel()
-        self.cancelar_compra.geometry('300x500+500+50')
+        self.cancelar_compra.geometry('300x450+500+50')
         self.cancelar_compra.resizable(0,0)
         ident = self.cancelar_compra.winfo_id()
         # Construye mensaje de la barra de título
@@ -224,7 +242,7 @@ class Aplicacion():
         pin_label= ttk.Label(self.cancelar_compra, text="PIN:")
         pin_label.pack(side=TOP, padx=5, pady=5)
         pin_var = tk.StringVar()
-        cuadro_pin= ttk.Entry(self.cancelar_compra, textvariable=pin_var)
+        cuadro_pin= ttk.Entry(self.cancelar_compra, show ="*", textvariable=pin_var)
         cuadro_pin.pack(side=TOP, padx=5, pady=5)
         #-----------Boton Comprar-------------
         boton = tk.Button(self.cancelar_compra, text='ACEPTAR', 
