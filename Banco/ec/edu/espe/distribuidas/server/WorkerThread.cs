@@ -67,7 +67,18 @@ namespace BancoSocket
                     TarjetaReqC req = new TarjetaReqC(mensaje);
                     req.unmarshall();
                     Tarjeta tarjeta = new Tarjeta();
-                    String validar = tarjeta.ValidarTarjeta(req.NumTarjeta, req.Cvv, req.Fecha, conexion);
+                    String validar = tarjeta.ValidarTarjetaCancelacion(req.NumTarjeta, req.Cvv, req.Fecha, conexion);
+
+                    Console.WriteLine("Valid: " + validar);
+                    String cuentaValida = tarjeta.ConsultaCuenta(validar, conexion);
+                    Console.WriteLine("Valid: " + cuentaValida);
+
+                    //String cancelacion = tarjetaOp.RealizarConsumos(cuentaValidacion, conexion);
+                    String registroCuentaC = req.Referencia + "|" + req.Transaccion + "|" + validar + "|" + cuentaValida + "|" + "0";
+
+                    String resRegistroC = tarjeta.RegistroCuenta(registroCuentaC, conexion);
+
+
                     TarjetaResC resp = new TarjetaResC(req.Transaccion,req.Referencia,validar);
                     resp.marshall();
                     //Console.WriteLine("Mensaje de salida" + resp.Mensaje);
