@@ -13,6 +13,7 @@ namespace BancoSocket
         private String monto;
         private String referencia;
         private String mensaje;
+        private String mes;
         private String codigo;
 
         public TarjetaReq(String mensaje)
@@ -31,11 +32,13 @@ namespace BancoSocket
         public string Referencia { get => referencia; set => referencia = value; }
         public string Mensaje { get => mensaje; set => mensaje = value; }
         public string Codigo { get => codigo; set => codigo = value; }
+        public string Mes { get => mes; set => mes = value; }
 
         public void unmarshall()
         {
+            //CMP|1233|5100123412341234|186|09/21|317.45|4|000120
             string[] partes = Mensaje.Split(SEPARATOR);
-            if (partes.Length !=7)
+            if (partes.Length !=8)
             {
                 throw new ProtocolException("Mensaje Incorrecto");
             }
@@ -91,7 +94,15 @@ namespace BancoSocket
             }
             try
             {
-                this.Referencia = partes[6];
+                this.Mes = partes[6];
+            }
+            catch (Exception e)
+            {
+                throw new ProtocolException("Mes invalido");
+            }
+            try
+            {
+                this.Referencia = partes[7];
             }
             catch (Exception e)
             {

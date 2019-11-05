@@ -34,19 +34,19 @@ namespace BancoSocket.ec.edu.espe.distribuidas.sockets.protocol
         {
             if(this.validez!=null)
             {
-                Mensaje = transaccion+TarjetaRes.SEPARATOR+referencia+TarjetaRes.SEPARATOR+fecha+TarjetaRes.SEPARATOR+"OK";
+                Mensaje = transaccion+SEPARATOR+referencia+SEPARATOR+fecha+SEPARATOR+"OK";
                 Console.Beep();
             }
             else
             {
-                Mensaje = transaccion+TarjetaRes.SEPARATOR+referencia+TarjetaRes.SEPARATOR+fecha+TarjetaRes.SEPARATOR+"NK";
+                Mensaje = transaccion+SEPARATOR+referencia+SEPARATOR+fecha+SEPARATOR+"NK";
                 Console.Beep();
             }
         }
 
         public static String GetTimestamp(DateTime value)
         {
-            return value.ToString("yyyyMMddHHmmssffff");
+            return value.ToString("yyyyMMddHHmmss");
         }
         
     }

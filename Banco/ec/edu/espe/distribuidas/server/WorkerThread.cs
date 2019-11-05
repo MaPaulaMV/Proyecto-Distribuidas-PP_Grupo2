@@ -26,31 +26,43 @@ namespace BancoSocket
             byte[] b = new byte[100];
             int k = socket.Receive(b);
             String mensaje = "";
-            String validez = "";
+            String response = null;
             //Console.WriteLine(k);
             Console.WriteLine("Recieved...");
             for (int i = 0; i < k; i++)
             {
-                Console.Write(Convert.ToChar(b[i]));
+                //Console.WriteLine(Convert.ToChar(b[i]));
                 ASCIIEncoding asen = new ASCIIEncoding();
                 _ = Convert.ToChar(b[i]);
                 mensaje = mensaje+Convert.ToChar(b[i]);
                 
                 
             }
-            Console.Write("Mensaje: " + mensaje);
-            TarjetaReq reqT = new TarjetaReq(mensaje);
-            reqT.unmarshall();
-            Tarjeta tarjetaOp= new Tarjeta();
-            String valid = tarjetaOp.ValidarTarjeta(reqT.NumTarjeta, reqT.Cvv, reqT.Fecha, conexion);
-            TarjetaRes resT = new TarjetaRes(reqT.Transaccion,reqT.Referencia,valid);
-            resT.marshall();
-            Console.WriteLine("Mensaje de salida" + resT.Mensaje);
+            Console.WriteLine("Mensaje: " + mensaje);
+            String opcion = mensaje.Substring(0,3);
+            Console.WriteLine("Opcion de transaccion: "+opcion);
+            switch (opcion)
+            {
+                case "CMP":
+                    TarjetaReq reqT = new TarjetaReq(mensaje);
+                    reqT.unmarshall();
+                    Tarjeta tarjetaOp = new Tarjeta();
+                    String valid = tarjetaOp.ValidarTarjeta(reqT.NumTarjeta, reqT.Cvv, reqT.Fecha, conexion);
+                    //tring cobro = tarjetaOp.RealizarConsumo(reqT.);
+                    TarjetaRes resT = new TarjetaRes(reqT.Transaccion, reqT.Referencia, valid);
+                    resT.marshall();
+                    //Console.WriteLine("Mensaje de salida" + resT.Mensaje);
+                    response = resT.Mensaje;
+                    Console.WriteLine(response);
+                    break;
+                case "CNC":
+                    response = "AUN NO IMPLEMENTAMOS :'V";
+                    break;
+            }
+            
             j++;
             //byte[] byData = System.Text.Encoding.ASCII.GetBytes("que mas mijin.... Att:ElBanco"+ j+ "\n");
-            byte[] byData = System.Text.Encoding.ASCII.GetBytes(resT.Mensaje);
-            String datas=resT.Mensaje;
-            
+            byte[] byData = System.Text.Encoding.ASCII.GetBytes(response);
             socket.Send(byData);
             socket.Close();
         }
