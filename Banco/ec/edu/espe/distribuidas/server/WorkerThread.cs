@@ -55,14 +55,16 @@ namespace BancoSocket
                     response = resT.Mensaje;
                     Console.WriteLine(response);
                     break;
-                case "CNC":
+                case "CNP":
                     TarjetaReqC req = new TarjetaReqC(mensaje);
                     req.unmarshall();
                     Tarjeta tarjeta = new Tarjeta();
                     String validar = tarjeta.ValidarTarjeta(req.NumTarjeta, req.Cvv, req.Fecha, conexion);
                     TarjetaResC resp = new TarjetaResC(req.Transaccion,req.Referencia,validar);
                     resp.marshall();
-
+                    //Console.WriteLine("Mensaje de salida" + resp.Mensaje);
+                    response = resp.Mensaje;
+                    Console.WriteLine(response);
                     break;
             }
             

@@ -25,7 +25,7 @@ namespace BancoSocket
             server = "localhost";
             database = "proyecto";
             user = "root";
-            password = "facilita";
+            password = "";
             port = "3306";
             sslM = "none";
 
@@ -122,6 +122,10 @@ namespace BancoSocket
             }
 
             return result;
+        }
+        public String RealizarCancelacion()
+        {
+            return null;
         }
 
 

@@ -12,6 +12,7 @@ namespace BancoSocket.ec.edu.espe.distribuidas.sockets.protocol
         private String validez;
         private const String SEPARATOR = "|";
         private String fecha;
+        
 
         public string Mensaje { get => mensaje; set => mensaje = value; }
 
