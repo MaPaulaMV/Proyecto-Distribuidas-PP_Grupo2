@@ -56,9 +56,13 @@ namespace BancoSocket
                     Console.WriteLine(response);
                     break;
                 case "CNC":
-                    TarjetaReq req = new TarjetaReq(mensaje);
+                    TarjetaReqC req = new TarjetaReqC(mensaje);
                     req.unmarshall();
-                    response = "AUN NO IMPLEMENTAMOS :'V";
+                    Tarjeta tarjeta = new Tarjeta();
+                    String validar = tarjeta.ValidarTarjeta(req.NumTarjeta, req.Cvv, req.Fecha, conexion);
+                    TarjetaResC resp = new TarjetaResC(req.Transaccion,req.Referencia,validar);
+                    resp.marshall();
+
                     break;
             }
             

@@ -64,5 +64,9 @@ namespace BancoSocket
 
             return result;
         }
+        public String Cancelacion()
+        {
+            return null;
+        }
     }
 }
