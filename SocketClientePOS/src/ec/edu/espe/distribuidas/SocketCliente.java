@@ -27,11 +27,10 @@ public class SocketCliente {
             id= res.getIdTrans();
             while (true) {
                 new WorkerThread(new Socket("25.76.226.113", 1234),id,index).start();
-                 index++;
+                index++;
                 Thread.sleep(2000);
-            }
+           }
         }
-
 
     }
 

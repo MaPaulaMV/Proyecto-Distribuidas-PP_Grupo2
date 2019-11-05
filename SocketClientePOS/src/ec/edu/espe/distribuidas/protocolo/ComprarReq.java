@@ -1,27 +1,29 @@
 
 package ec.edu.espe.distribuidas.protocolo;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class ComprarReq {
-    
+    private static final String SEPARATOR=Pattern.quote("|");
     private static final String codCompra="CMP";
     private String idTrans;
-    private String numTarjet="4731565033672452";
-    private String cvv="745";
-    private String fechaExp="01/22";
+    private String numTarjet;
+    private String cvv;
+    private String fechaExp;
     private BigDecimal valorCompra;
     private BigDecimal valorIva;
     private BigDecimal montoFinal;
     private int numMeses; 
     private int codigoVoucher;
     private String mensaje; 
-
-    
-    
+    private static final String rutaAp = "ArchivosTarjetas/Tarjetas.txt";
     
     public ComprarReq(String idTrans, int codigoVoucher) {
         this.idTrans = idTrans;
@@ -35,9 +37,6 @@ public class ComprarReq {
         this.mensaje = mensaje;
     }
     
-    
-
-
     public String getIdTrans() {
         return idTrans;
     }
@@ -123,8 +122,6 @@ public class ComprarReq {
         this.valorCompra= new BigDecimal(valorMin + ( valorMax - valorMin ) * rand.nextDouble());
         this.valorIva = this.valorCompra.multiply(new BigDecimal(0.12));
         this.montoFinal= this.valorCompra.add(this.valorIva);
-       
-       
     }
     
     
@@ -141,7 +138,18 @@ public class ComprarReq {
         +this.valorCompra.setScale(2, this.valorCompra.ROUND_CEILING).toPlainString()+"|"
         +this.valorIva.setScale(2, this.valorIva.ROUND_CEILING).toPlainString()+"|"
         +this.montoFinal.setScale(2, this.montoFinal.ROUND_CEILING).toPlainString()+"|"
-        +this.numMeses+"|"+this.codigoVoucher;
+        +this.numMeses+"|"+this.codigoVoucher+"|"+4;
+    }
+    
+    
+    public void newTarjeta() throws IOException {
+
+        String tarjetaPipes = Files.readAllLines(Paths.get(rutaAp)).get((int) (Math.random() * 29));
+        String parts [] =tarjetaPipes.split(SEPARATOR);
+        this.numTarjet = parts[0];
+        this.cvv = parts[6];
+        this.fechaExp = parts[7];
+        
     }
    
     
