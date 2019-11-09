@@ -12,7 +12,7 @@ sock.listen(1)
 # Cuando un cliente se conecte vamos a obtener la client_addr osea la direccion
 # tambien vamos a obtener la con, osea la conexion que servira para enviar datos y recibir datos
 con, client_addr =  sock.accept()
-text = "19|      |OK" # El texto que enviaremos
+text = "1547|      |OK" # El texto que enviaremos
 con.send(text.encode()) # Enviamos el texto al cliente que se conecta
 data = con.recv(4096)
 print(data.decode())

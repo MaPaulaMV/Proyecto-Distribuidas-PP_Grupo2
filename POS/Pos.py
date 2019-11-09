@@ -46,7 +46,7 @@ class Aplicacion():
         port = 1234 # Puerto de comunicacion
         # Realizamos la conexion al la IP y puerto
         #sock.connect(('25.76.226.113',port))
-        sock.connect(('localhost',port))
+        sock.connect(('10.40.10.235',port))
         # Enviamos un mensaje
         sock.send(msgC_var.encode())
         # Leemos los datos del servidor
@@ -74,7 +74,7 @@ class Aplicacion():
         port = 1234 # Puerto de comunicacion
         # Realizamos la conexion al la IP y puerto
         #sock.connect(('25.76.226.113',port))
-        sock.connect(('localhost',port))
+        sock.connect(('10.40.10.235',port))
         # Enviamos un mensaje
         sock.send(msgC_var.encode())
         # Leemos los datos del servidor
@@ -99,7 +99,8 @@ class Aplicacion():
         port = 1234 # Puerto de comunicacion
         # Realizamos la conexion al la IP y puerto
         #sock.connect(('25.76.226.113',port))
-        sock.connect(('localhost',port))
+        #sock.connect(('10.40.9.109',port))
+        sock.connect(('10.40.10.235',port))
         # Enviamos un mensaje
         sock.send(msg_var.encode())
         # Leemos los datos del servidor
