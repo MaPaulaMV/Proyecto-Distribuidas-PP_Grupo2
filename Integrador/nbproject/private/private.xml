@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/ec/edu/espe/distribuidas/proyectop1/Integrador.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/RegistroReq.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/Integrador.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/CancelacionReq.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/accesoDatos/AccesoDB.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/RegistroRes.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/CompraRes.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/redirecionamientoBancos/RedBanco.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/CompraReq.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/traductorIntegrador/CancelacionRes.java</file>
+            <file>file:/D:/Espe/8%20Octavo%20Semestre/Aplicaciones%20Distribuidas/Primer%20Parcial/Proyecto-Distribuidas-PP_Grupo1/Integrador/src/ec/edu/espe/distribuidas/proyectop1/servicios/Worker.java</file>
+        </group>
+    </open-files>
+</project-private>

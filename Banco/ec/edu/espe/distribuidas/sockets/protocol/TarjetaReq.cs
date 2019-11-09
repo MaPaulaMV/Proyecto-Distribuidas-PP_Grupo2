@@ -38,6 +38,7 @@ namespace BancoSocket
         {
             //CMP|1233|5100123412341234|186|09/21|317.45|4|000120
             string[] partes = Mensaje.Split(SEPARATOR);
+            
             if (partes.Length !=8)
             {
                 throw new ProtocolException("Mensaje Incorrecto");

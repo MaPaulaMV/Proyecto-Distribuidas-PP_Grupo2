@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj": {}
+    "C:\\Users\\jaant\\OneDrive\\Documentos\\GitHub\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj": {
+    "C:\\Users\\jaant\\OneDrive\\Documentos\\GitHub\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
+        "projectUniqueName": "C:\\Users\\jaant\\OneDrive\\Documentos\\GitHub\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
         "projectName": "BancoSocket",
-        "projectPath": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
-        "packagesPath": "C:\\Users\\sxaizaga\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sxaizaga\\Documents\\Github\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\obj\\",
+        "projectPath": "C:\\Users\\jaant\\OneDrive\\Documentos\\GitHub\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\BancoSocket.csproj",
+        "packagesPath": "C:\\Users\\jaant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jaant\\OneDrive\\Documentos\\GitHub\\Proyecto-Distribuidas-PP_Grupo2\\Banco\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\sxaizaga\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\jaant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
